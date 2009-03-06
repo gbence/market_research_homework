@@ -1,0 +1,5 @@
+= form_for_q 30 do
+  = ask 'Milyen készüléket használ?'
+  %p.suggestion A lehetőségek közül többet is választhat!
+  = multiple_choice_with_free 'Alcatel', 'BlackBerry', 'iPhone', 'LG', 'Motorola', 'Nokia', 'Panasonic', 'Sagem', 'Samsung', 'Siemens', 'Sony Ericsson', 'egyéb:'
+  = submit

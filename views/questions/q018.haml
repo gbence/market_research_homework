@@ -1,0 +1,5 @@
+= form_for_q 18 do
+  = ask 'Az alábbi állítások közül melyik igaz Önre?'
+  %p.suggestion A lehetőségek közül többet is választhat!
+  = multiple_choice 'Csak akkor használom a telefonomat külföldön, ha nagyon muszáj.', 'Nem telefonálok, inkább SMS-ezek.', 'Kicsit visszafogom magam a magas roaming díjak miatt.', 'Ugyanúgy telefonálok és SMS-ezek, mint otthon.'
+  = submit

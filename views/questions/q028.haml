@@ -1,0 +1,5 @@
+= form_for_q 28 do
+  = ask 'Általában miért vásárol új készüléket?'
+  %p.suggestion A lehetőségek közül többet is választhat!
+  = multiple_choice_with_free 'Design', 'Új technológiai újdonság (streaming, chat, mobil TV, stb.)', 'Lejárt hűségszerződés', 'Kedvezményes ajánlat, akció', 'Egyéb, kérjük részletezze:'
+  = submit

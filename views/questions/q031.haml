@@ -1,0 +1,5 @@
+= form_for_q 31 do
+  = ask 'Milyen árkategóriájú készüléket használ?'
+  %p.suggestion A lehetőségek közül egyet válasszon!
+  = single_choice '0 - 5.000 Ft', '5.001 - 20.000 Ft', '20.001 - 60.000 Ft', '60.001 - 120.000 Ft', '120.001 Ft, vagy annál is több', 'Nem tudom'
+  = submit

@@ -1,0 +1,5 @@
+= form_for_q 23 do
+  = ask 'Ön szerint mi jellemzi legjobban a Vodafone mobilinternet szolgáltatás?'
+  %p.suggestion A lehetőségek közül egyet válasszon!
+  = single_choice 'Megbízhatóan működik.', 'Általában megy, de vannak problémák.', 'Csak néhány helyen megy, ott is lassan.', 'Alig tudom használni, mindig vannak vele problémák.'
+  = submit

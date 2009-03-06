@@ -1,0 +1,5 @@
+= form_for_q 13 do
+  = ask 'Ismeri az alábbi mobil-szolgáltatásokat?'
+  = table [ 'Autópálya matrica vásárlás', 'Parkolójegy vásárlás', 'Mozijegy vásárlás', 'Apróhirdetés feladás', 'Lottó vásárlás', 'Csengőhang letöltés', 'Játék letöltés', 'Mobil TV', 'Film letöltés', 'Zene letöltés', 'BKV-jegy vásárlás', 'Koncert-jegy vásárlás', 'Múzeum-jegy vásárlás' ], [ 'Szolgáltatás' ] + [nil]*2 do |item|
+    = single_choice_for item, 'Igen', 'Nem'
+  = submit

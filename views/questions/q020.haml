@@ -1,0 +1,5 @@
+= form_for_q 20 do
+  = ask 'Melyik szolgáltatónál van mobilinternet előfizetése?'
+  %p.suggestion A lehetőségek közül többet is választhat!
+  = multiple_choice 'Pannon', 'T-Mobile', 'Vodafone'
+  = submit

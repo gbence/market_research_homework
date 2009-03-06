@@ -1,0 +1,5 @@
+= form_for_q 1 do
+  = ask 'Használ mobiltelefont?'
+  %p.suggestion A lehetőségek közül egyet válasszon!
+  = single_choice 'Igen', 'Nem'
+  = submit

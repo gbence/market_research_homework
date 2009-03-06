@@ -1,0 +1,5 @@
+= form_for_q 35 do
+  = ask 'Hol hallott a mobilkód szolgáltatásról?'
+  %p.suggestion A lehetőségek közül többet is választhat!
+  = multiple_choice_with_free 'Internet', 'Magazinok', 'Szórólapok', 'Ismerőstől', 'Egyéb:'
+  = submit

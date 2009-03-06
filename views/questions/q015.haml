@@ -1,0 +1,5 @@
+= form_for_q 15 do
+  = ask 'A szolgáltatások közül melyiket használná szívesen?'
+  = table [ 'Autópálya matrica vásárlás', 'Parkolójegy vásárlás', 'Mozijegy vásárlás', 'Apróhirdetés feladás', 'Lottó vásárlás', 'Csengőhang letöltés', 'Játék letöltés', 'Mobil TV', 'Film letöltés', 'Zene letöltés', 'BKV-jegy vásárlás', 'Koncert-jegy vásárlás', 'Múzeum-jegy vásárlás' ], [ nil, 'Szolgáltatás' ] do |item|
+    = check_box_for item
+  = submit

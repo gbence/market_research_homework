@@ -1,0 +1,5 @@
+= form_for_q 17 do
+  = ask 'Külföldön milyen mobiltelefon szolgáltatásokat vett igénybe?'
+  %p.suggestion A lehetőségek közül többet is választhat!
+  = multiple_choice 'Telefonálás', 'SMS', 'MMS', 'Hangposta', 'Internetezés / WAP'
+  = submit

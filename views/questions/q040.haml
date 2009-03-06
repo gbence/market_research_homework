@@ -1,0 +1,5 @@
+= form_for_q 40 do
+  = ask 'Mire használta vagy használja a mobilkódot?'
+  %p.suggestion A lehetőségek közül többet is választhat!
+  = multiple_choice_with_free 'Nyereményjáték', 'Információszerzés', 'Névjegykártya bejegyzések gyors olvasása', 'Egyéb:'
+  = submit

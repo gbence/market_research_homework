@@ -1,0 +1,5 @@
+= form_for_q 24 do
+  = ask 'Rendelkezik az Ön készüléke a következő funkciókkal?'
+  = table [ 'Internet/WAP', 'Mobilkód', 'Számológép', 'Konferenciahívás', 'Hangposta', 'Ébresztőóra', 'MMS', 'Kihangosítás', 'Bluetooth', 'Játékok', 'Chat', 'GPS', 'Szundi', 'Fényképezés', 'Videó rögzítés', 'SMS', 'MP3 lejátszás', 'Jegyzet', 'Határidőnapló', 'Bejövő hívás elnémítása', 'Több telefonszám mentése egy névhez', 'Csengőhang rendelése névhez', 'Gyorshívás', 'SMS sablon', 'Híváskorlátozás', 'EMS (képüzenet)', 'Java támogatás', 'Hívásszűrés', 'Valutaárfolyam', 'Diktafon', 'Emailezés', 'Hívásvárakoztatás', 'Ütésállóság', 'Vízállóság', 'Rádió', 'Nagyméretű memóriakártya' ], [ 'Funkció' ] + [nil]*3 do |item|
+    = single_choice_for item, 'Igen', 'Nem', 'Nem tudom'
+  = submit

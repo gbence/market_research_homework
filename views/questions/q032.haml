@@ -1,0 +1,5 @@
+= form_for_q 32 do
+  = ask 'Hány működőképes készüléke van, beleértve a nem használt készülékeket is?'
+  %p.suggestion A lehetőségek közül egyet válasszon!
+  = single_choice '1', '2', '3', '4', '5', 'Több'
+  = submit

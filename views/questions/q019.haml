@@ -1,0 +1,5 @@
+= form_for_q 19 do
+  = ask 'Rendelkezik mobilinternet előfizetéssel?'
+  %p.suggestion A lehetőségek közül egyet válasszon!
+  = single_choice 'Igen', 'Nem'
+  = submit

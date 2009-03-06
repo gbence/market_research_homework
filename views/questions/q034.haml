@@ -1,0 +1,5 @@
+= form_for_q 34 do
+  = ask 'Milyen gyakran van bekapcsolva az aktívan használt készüléke?'
+  %p.suggestion A lehetőségek közül egyet válasszon!
+  = single_choice 'Éjjel-nappal', 'Nappal', 'Csak munkaidőben', 'Alkalmanként'
+  = submit

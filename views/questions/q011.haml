@@ -1,0 +1,5 @@
+= form_for_q 11 do
+  = ask 'Mióta használ mobiltelefont?'
+  %p.suggestion A lehetőségek közül egyet válasszon!
+  = single_choice 'Kevesebb, mint 1 éve', '1 - 3 éve', '4 - 6 éve', '7 - 10 éve', 'Több, mint 10 éve'
+  = submit
