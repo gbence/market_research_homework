@@ -60,19 +60,26 @@ module Haml::Helpers
     }, :layout => false, :locals => { :choices => choices }).chomp + "\n"
   end
 
-  def table(items, header, &block)
+  def table(items, header, disabler=nil, &block)
     block_output = ''
-    items.each { |item| block_output += capture_haml(item, &block)}
+    items.each do |item|
+      disabled = ( disabler.call(item) rescue false )
+      block_output += capture_haml(item, disabled, &block)
+    end
     %{<table><thead><tr>#{header.map{|h| "<th>#{h}</th>"}.join('')}</tr></thead><tbody>#{block_output}</tbody></table>}
   end
 
-  def single_choice_for(item, *choices)
+  def single_choice_for(item, disabled, *choices)
+    return '' if disabled == true
     @parity ||= 0; @parity += 1
+    #%{<tr class="#{@parity%2==0 ? 'even' : 'odd'}#{disabled && ' disabled' || ''}"><td>#{item}</td>#{choices.map{|c| %{<td><input #{disabled && 'disabled="disabled" ' || ''}type="radio" name="a[#{item}]" value="#{c}" id="choice_#{(item+c).hash.abs}"/><label for="choice_#{(item+c).hash.abs}">#{c}</label></td>}}.join('')}</tr>}
     %{<tr class="#{@parity%2==0 ? 'even' : 'odd'}"><td>#{item}</td>#{choices.map{|c| %{<td><input type="radio" name="a[#{item}]" value="#{c}" id="choice_#{(item+c).hash.abs}"/><label for="choice_#{(item+c).hash.abs}">#{c}</label></td>}}.join('')}</tr>}
   end
 
-  def check_box_for(item)
+  def check_box_for(item, disabled)
+    return '' if disabled == true
     @parity ||= 0; @parity += 1
+    #%{<tr class="#{@parity%2==0 ? 'even' : 'odd'}#{disabled && ' disabled' || ''}"><td><input #{disabled && 'disabled="disabled" ' || ''}type="checkbox" name="a[]" id="check_#{item.hash.abs}" value="#{item}"/></td><td><label for="check_#{item.hash.abs}">#{item}</label></td></tr>}
     %{<tr class="#{@parity%2==0 ? 'even' : 'odd'}"><td><input type="checkbox" name="a[]" id="check_#{item.hash.abs}" value="#{item}"/></td><td><label for="check_#{item.hash.abs}">#{item}</label></td></tr>}
   end
 
@@ -168,7 +175,9 @@ end
 get '/:questionnaire/:qn' do
   redirect '/' unless @q
   redirect '/' unless @q.hash == session[:hash]
-  haml :"questions/#{params[:qn]}", :layout => :questions
+  output = haml :"questions/#{params[:qn]}", :layout => :questions
+  flash.keys.each { |k| flash.delete(k) } # ?
+  output
 end
 
 # # q001: 'Használ mobiltelefont?' [ 'igen' => :q2, 'nem' => .. ]
@@ -240,22 +249,30 @@ end
 
 # q003: 'Meg van elégedve a Pannon szolgáltatásával?', ["Igen", "Nem"]
 post '/:questionnaire/q003' do
-  Answer.create(:answer => params[:a], :number => @n, :questionnaire => @q)
-  if @q.answers.first(:number => 2).answer.include?('T-Mobile')
-    redirect_to_q 4
-  elsif @q.answers.first(:number => 2).answer.include?('Vodafone')
-    redirect_to_q 5
-  else
+  begin
+    Answer.create(:answer => params[:a], :number => @n, :questionnaire => @q)
+    if Answer.all(:questionnaire_id => @q.id, :number => 2).last.answer.include?('T-Mobile')
+      redirect_to_q 4
+    elsif Answer.all(:questionnaire_id => @q.id, :number => 2).last.answer.include?('Vodafone')
+      redirect_to_q 5
+    else
+      redirect_to_q 6
+    end
+  rescue
     redirect_to_q 6
   end
 end
 
 # q004: 'Meg van elégedve a T-Mobile szolgáltatásával?', ["Igen", "Nem"]
 post '/:questionnaire/q004' do
-  Answer.create(:answer => params[:a], :number => @n, :questionnaire => @q)
-  if @q.answers.first(:number => 2).answer.include?('Vodafone')
-    redirect_to_q 5
-  else
+  begin
+    Answer.create(:answer => params[:a], :number => @n, :questionnaire => @q)
+    if Answer.all(:questionnaire_id => @q.id, :number => 2).last.answer.include?('Vodafone')
+      redirect_to_q 5
+    else
+      redirect_to_q 6
+    end
+  rescue
     redirect_to_q 6
   end
 end
@@ -377,9 +394,9 @@ end
 # q018: 'Ön szerint mi jellemzi legjobban a Pannon mobilinternet szolgáltatás?', ["Megb\303\255zhat\303\263an m\305\261k\303\266dik.", "\303\201ltal\303\241ban megy, de vannak probl\303\251m\303\241k.", "Csak n\303\251h\303\241ny helyen megy, ott is lassan.", "Alig tudom haszn\303\241lni, mindig vannak vele probl\303\251m\303\241k."]
 post '/:questionnaire/q018' do
   Answer.create(:answer => params[:a], :number => @n, :questionnaire => @q)
-  if @q.answers.first(:number => 17).answer.include?('T-Mobile')
+  if @q.answers.all(:number => 17).last.answer.include?('T-Mobile')
     redirect_to_q 19
-  elsif @q.answers.first(:number => 17).answer.include?('Vodafone')
+  elsif @q.answers.all(:number => 17).last.answer.include?('Vodafone')
     redirect_to_q 20
   else
     redirect_to_q 21
@@ -389,7 +406,7 @@ end
 # q019: 'Ön szerint mi jellemzi legjobban a T-Mobile mobilinternet szolgáltatás?', ["Megb\303\255zhat\303\263an m\305\261k\303\266dik.", "\303\201ltal\303\241ban megy, de vannak probl\303\251m\303\241k.", "Csak n\303\251h\303\241ny helyen megy, ott is lassan.", "Alig tudom haszn\303\241lni, mindig vannak vele probl\303\251m\303\241k."]
 post '/:questionnaire/q019' do
   Answer.create(:answer => params[:a], :number => @n, :questionnaire => @q)
-  if @q.answers.first(:number => 17).answer.include?('Vodafone')
+  if @q.answers.all(:number => 17).last.answer.include?('Vodafone')
     redirect_to_q 20
   else
     redirect_to_q 21
@@ -485,9 +502,9 @@ post '/:questionnaire/q034' do
   begin
     Answer.create(:answer => params[:a], :number => @n, :questionnaire => @q)
     # mobilkódra ugorjunk-e?
-    a1=@q.answers.first(:number => 21).answer rescue {}
-    a2=@q.answers.first(:number => 32).answer rescue {}
-    if a1['Mobilkód'] == 'Igen' and a2['Mobilkód nyereményjáték'] == 'Igen'
+    a1 = ( Answer.all(:questionnaire_id => @q.id, :number => 21).last.answer rescue {} )
+    a2 = ( Answer.all(:questionnaire_id => @q.id, :number => 32).last.answer rescue {} )
+    if a1['Mobilkód'] == 'Igen' or a2['Mobilkód nyereményjáték'] == 'Igen'
       redirect_to_q 35
     else
       redirect_to_q 42

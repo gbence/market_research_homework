@@ -1,6 +1,6 @@
 = form_for_q 47 do
   = ask 'Hányan élnek egy háztartásban?'
-  %p.suggestion Számjegyekkel írjon be egy pozitív egész számot!
+  %p.suggestion Számjegyeket írjon a mezőbe!
   - if flash[:error]
     %p.error= flash[:error]
   = free_text_field

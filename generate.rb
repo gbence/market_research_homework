@@ -72,40 +72,40 @@ def multiple_choice_with_free(question, choices)
   end
 end
 
-def table_single_choice(question, choices, header, table)
+def table_single_choice(question, choices, header, l, table)
   skeleton(question, choices, table)
   File.open('%s/q%03d.haml' % [ DIR, @qn ], 'w') do |f|
     f.write(%{= form_for_q #{@qn} do
   = ask '#{question}'
 #{suggestions}
-  = table [ #{table.map { |e| "'#{e.to_s}'" }.join(', ')} ], [ '#{header}' ] + [nil]*#{choices.size} do |item|
-    = single_choice_for item, #{choices.map { |c| "'#{c}'" }.join(", ")}
+  = table [ #{table.map { |e| "'#{e.to_s}'" }.join(', ')} ], [ '#{header}' ] + [nil]*#{choices.size}, #{l.empty? ? 'nil' : l} do |item,disabled|
+    = single_choice_for item, disabled, #{choices.map { |c| "'#{c}'" }.join(", ")}
   = submit
 })
   end
 end
 
-def table_check_box(question, header, table)
+def table_check_box(question, header, l, table)
   skeleton(question, table)
   File.open('%s/q%03d.haml' % [ DIR, @qn ], 'w') do |f|
     f.write(%{= form_for_q #{@qn} do
   = ask '#{question}'
 #{suggestions}
-  = table [ #{table.map { |e| "'#{e.to_s}'" }.join(', ')} ], [ nil, '#{header}' ] do |item|
-    = check_box_for item
+  = table [ #{table.map { |e| "'#{e.to_s}'" }.join(', ')} ], [ nil, '#{header}' ], #{l.empty? ? 'nil' : l} do |item,disabled|
+    = check_box_for item, disabled
   = submit
 })
   end
 end
 
-def table_multiple_choice(question, choices, header, table)
+def table_multiple_choice(question, choices, header, l, table)
   skeleton(question, choices, table)
   File.open('%s/q%03d.haml' % [ DIR, @qn ], 'w') do |f|
     f.write(%{= form_for_q #{@qn} do
   = ask '#{question}'
 #{suggestions}
-  = table [ #{table.map { |e| "'#{e.to_s}'" }.join(', ')} ], [ '#{header}' ] + [nil]*#{choices.size} do |item|
-    = multiple_choice_for item, #{choices.map { |c| "'#{c}'" }.join(", ")}
+  = table [ #{table.map { |e| "'#{e.to_s}'" }.join(', ')} ], [ '#{header}' ] + [nil]*#{choices.size}, #{l.empty? ? 'nil' : l} do |item,disabled|
+    = multiple_choice_for item, disabled, #{choices.map { |c| "'#{c}'" }.join(", ")}
   = submit
 })
   end
@@ -116,7 +116,7 @@ def free_number(question)
   File.open('%s/q%03d.haml' % [ DIR, @qn ], 'w') do |f|
     f.write(%{= form_for_q #{@qn} do
   = ask '#{question}'
-#{suggestions('Számjegyekkel írjon be egy pozitív egész számot!')}
+#{suggestions('Számjegyeket írjon a mezőbe!')}
   = free_text_field
   = submit
 })
@@ -162,44 +162,43 @@ single_choice 'Ön szerint mi jellemzi legjobban a T-Mobile mobilinternet szolg�
 single_choice 'Ön szerint mi jellemzi legjobban a Vodafone mobilinternet szolgáltatás?', [ 'Megbízhatóan működik.', 'Általában megy, de vannak problémák.', 'Csak néhány helyen megy, ott is lassan.', 'Alig tudom használni, mindig vannak vele problémák.' ]
 
 PHONE = [ 'Internet/WAP',
-          'Mobilkód',
           'Számológép',
-          'Konferenciahívás',
-          'Hangposta',
           'Ébresztőóra',
           'MMS',
-          'EMS (képüzenet)',
           'Kihangosítás',
           'Bluetooth',
           'Játékok',
-          'Chat',
           'GPS',
           'Szundi',
           'Fényképezés',
           'Videó rögzítés',
           'SMS',
           'MP3 lejátszás',
-          'Jegyzet',
           'Határidőnapló',
           'Bejövő hívás elnémítása',
-          'Több telefonszám mentése egy névhez',
           'Csengőhang rendelése névhez',
-          'Gyorshívás',
-          'SMS sablon',
-          'Híváskorlátozás',
-          'Java támogatás',
-          'Hívásszűrés',
-          'Valutaárfolyam',
           'Diktafon',
-          'Hívásvárakoztatás',
-          'Ütésállóság',
-          'Vízállóság',
           'Rádió',
-          'Nagyméretű memóriakártya' ]
+          #'Gyorshívás',
+          #'Hangposta',
+          #'Ütés- és vízállóság',
+          #'EMS (képüzenet)',
+          #'Chat',
+          #'Jegyzet',
+          #'Több telefonszám mentése egy névhez',
+          #'SMS sablon',
+          #'Híváskorlátozás',
+          #'Java támogatás',
+          #'Hívásszűrés',
+          #'Valutaárfolyam',
+          #'Hívásvárakoztatás',
+          #'Nagyméretű memóriakártya',
+          #'Konferenciahívás',
+          'Mobilkód' ]
 
-table_single_choice 'Rendelkezik az Ön készüléke a következő funkciókkal?', [ 'Igen', 'Nem', 'Nem tudom' ], 'Funkció', PHONE
-table_single_choice 'Milyen gyakran használja az alábbi funkciókat?', [ 'Mindig', 'Gyakran', 'Általában', 'Ritkán', 'Soha' ], 'Funkció', PHONE
-table_check_box 'A felsorolt funkciók közül melyiket használná szívesen?', 'Funkció', PHONE
+table_single_choice 'Rendelkezik az Ön készüléke a következő funkciókkal?', [ 'Igen', 'Nem', 'Nem tudom' ], 'Funkció', '', PHONE
+table_single_choice 'Milyen gyakran használja az alábbi funkciókat?', [ 'Naponta többször', 'Hetente többször', 'Néhány hetente', 'Ritkábban', 'Soha' ], 'Funkció', %{lambda { |item| Answer.all(:questionnaire_id => @q.id, :number => 21).last.answer[item] != 'Igen' rescue false }}, PHONE
+table_check_box 'A felsorolt funkciók közül melyiket használná szívesen?', 'Funkció', %{lambda { |item| Answer.all(:questionnaire_id => @q.id, :number => 21).last.answer[item] == 'Igen' rescue false }}, PHONE
 
 single_choice 'Milyen gyakran cseréli mobiltelefon készülékét?', [ '1 - 2 havonta', '3 - 6 havonta', '7 - 12 havonta', '13 - 24 havonta', '25 - 36 havonta', 'Ritkábban' ]
 multiple_choice_with_free 'Általában miért vásárol új készüléket?', [ 'Design', 'Új technológiai újdonság (streaming, chat, mobil TV, stb.)', 'Lejárt hűségszerződés', 'Kedvezményes ajánlat, akció', 'Egyéb, kérjük részletezze:' ]
@@ -207,7 +206,7 @@ single_choice 'Hány készüléke volt az elmúlt 5 évben?', [ '1 - 3', '4 - 6'
 multiple_choice_with_free 'Milyen készüléket használ?', [ 'Alcatel', 'BlackBerry', 'iPhone', 'LG', 'Motorola', 'Nokia', 'Panasonic', 'Sagem', 'Samsung', 'Siemens', 'Sony Ericsson', 'egyéb:' ]
 single_choice 'Milyen árkategóriájú a legdrágább mobiltelefon készüléke, amelyet használ?', [ '0 - 5.000 Ft', '5.001 - 20.000 Ft', '20.001 - 60.000 Ft', '60.001 - 120.000 Ft', '120.001 Ft, vagy annál is több', 'Nem tudom' ]
 single_choice 'Hány működőképes készüléke van, beleértve a nem használt készülékeket is?', [ '1', '2', '3', '4', '5', 'Több' ]
-single_choice 'Hány készüléket tart éjjel-nappal bekapcsolva?', [ 'Egyet sem', '1', '2', '3', '4', '5', 'Több' ]
+single_choice 'Hány készüléket tart éjjel-nappal bekapcsolva?', [ 'Egyet sem', '1', '2', '3', 'Több' ]
 single_choice 'Milyen gyakran van bekapcsolva az aktívan használt készüléke?', [ 'Éjjel-nappal', 'Nappal', 'Csak munkaidőben', 'Alkalmanként' ]
 
 SERVICES = [ 'Autópálya matrica vásárlás',
@@ -220,14 +219,11 @@ SERVICES = [ 'Autópálya matrica vásárlás',
              'Játék letöltés',
              'Mobil TV',
              'Film letöltés',
-             'Zene letöltés',
-             'BKV-jegy vásárlás',
-             'Koncert-jegy vásárlás',
-             'Múzeum-jegy vásárlás' ]
+             'Zene letöltés' ]
 
-table_single_choice 'Ismeri az alábbi mobil-szolgáltatásokat?', [ 'Igen', 'Nem' ], 'Szolgáltatás', SERVICES
-table_single_choice 'Használta már az alábbi mobil-szolgáltatásokat?', [ 'Igen', 'Nem' ], 'Szolgáltatás', SERVICES
-table_check_box 'A szolgáltatások közül melyiket használná szívesen?', 'Szolgáltatás', SERVICES
+table_single_choice 'Ismeri az alábbi mobil-szolgáltatásokat?', [ 'Igen', 'Nem' ], 'Szolgáltatás', '', SERVICES
+table_single_choice 'Használta már az alábbi mobil-szolgáltatásokat?', [ 'Igen', 'Nem' ], 'Szolgáltatás', %{lambda { |item| Answer.all(:questionnaire_id => @q.id, :number => 32).last.answer[item] == 'Nem' rescue false }}, SERVICES
+table_check_box 'A szolgáltatások közül melyiket használná szívesen?', 'Szolgáltatás', %{lambda { |item| Answer.all(:questionnaire_id => @q.id, :number => 32).last.answer[item] == 'Igen' rescue false }}, SERVICES
 
 multiple_choice_with_free 'Hol hallott a mobilkód szolgáltatásról?', [ 'Internet', 'Magazinok', 'Szórólapok', 'Ismerőstől', 'Egyéb:' ]
 single_choice 'Hallott már mobiltelefon készülékét támogató, mobilkód olvasására alkalmas szoftverről?', [ 'Igen', 'Nem' ]
