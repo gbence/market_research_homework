@@ -235,7 +235,7 @@ multiple_choice_with_free 'Milyen kódolvasót használ?', [ 'I-nigma', 'QuickMa
 free_text 'Értékelje a mobilkódot! Van értelme? Ön szerint miért jó, miért rossz?'
 
 single_choice 'Neme?', [ 'Férfi', 'Nő' ]
-free_number 'Kora?'
+free_number 'Ön hány éves?'
 single_choice 'Mi a legmagasabb iskolai végzettsége?', [ 'Nincs', '8 általános', 'Szakmunkás', 'Érettségi', 'Felsőfokú' ]
 single_choice 'Mennyi a havi nettó jövedelme?', [ 'Nincs saját keresetem', '100e Ft alatt', '100e - 200e Ft', '200e - 300e Ft', '300e - 500e Ft', '500e Ft felett', 'Nem kívánom megadni' ]
 single_choice_with_free 'Mi a munkaviszonya?', [ 'Tanuló', 'Alkalmazott', 'Vezető beosztású', 'Vállalkozó', 'Nyugdíjas', 'Munkanélküli', 'Egyéb:' ]

@@ -1,0 +1,6 @@
+%fieldset.element
+  %h2 Köszönjük
+  - unless ((Answer.all(:questionnaire_id => @q.id, :number => 49).last.answer == 'Nem') rescue true)
+    %p Kutatásunk eredményét, várhatóan egy hónapon belül megkapja a megadott e-mail címre.
+  %p Köszönjük, hogy segítette munkánkat, üdvözlettel,
+  %p Bajor Gyula, Bősze Szilvi, Golda Bence, Obreczán Mátyás és Szabó László

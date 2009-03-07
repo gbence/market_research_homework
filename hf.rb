@@ -172,6 +172,11 @@ get '/:questionnaire' do
   haml :intro
 end
 
+get '/:questionnaire/end' do
+  redirect '/' unless @q
+  haml :outro
+end
+
 get '/:questionnaire/:qn' do
   redirect '/' unless @q
   redirect '/' unless @q.hash == session[:hash]
@@ -611,6 +616,6 @@ end
 # q049: 'Szeretne kapni egy elektronikus példányt a kutatás eredményéből?', ["Nem", "Igen, erre az email-c\303\255mre:"]
 post '/:questionnaire/q049' do
   Answer.create(:answer => params[:a], :number => @n, :questionnaire => @q)
-  redirect "/#{@q.hash}"
+  redirect "/#{@q.hash}/end"
 end
 
