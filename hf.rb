@@ -99,7 +99,7 @@ class Questionnaire
 
   property :id, Serial
   property :hash, String, :length => 40, :nullable => false, :default => Proc.new { |r,p| Digest::SHA1.hexdigest(Time.now.tv_usec.to_s + 'gbence' + rand.to_s) }
-  timestamps :created_at, :updated_at
+  timestamps :created_at
   property :referer, String
 
   has n, :answers, :order => [:number.asc]
@@ -111,6 +111,7 @@ class Answer
   property :id, Serial
   property :answer, Yaml, :lazy => false
   property :number, Integer
+  timestamps :created_at
   belongs_to :questionnaire
 end
 
@@ -162,12 +163,14 @@ def redirect_to_q n
 end
 
 get '/' do
-  @q = Questionnaire.create :created_at => Time.now, :updated_at => Time.now, :referer => request.referer
+  @q = Questionnaire.create :created_at => Time.now, :updated_at => Time.now, :referer => (session[:last] || request.referer)
+  session.delete(:last)
   session[:hash] = @q.hash
   redirect '/%s' % [@q.hash]
 end
 
 get '/:questionnaire' do
+  session[:last] = params[:questionnaire]
   redirect '/' unless @q
   haml :intro
 end
