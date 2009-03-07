@@ -3,5 +3,5 @@
   %p.suggestion A lehetőségek közül többet is választhat!
   - if flash[:error]
     %p.error= flash[:error]
-  = multiple_choice 'Csak akkor használom a telefonomat külföldön, ha nagyon muszáj.', 'Nem telefonálok, inkább SMS-ezek.', 'Kicsit visszafogom magam a magas roaming díjak miatt.', 'Ugyanúgy telefonálok és SMS-ezek, mint otthon.'
+  = multiple_choice 'Csak akkor használom a telefonomat külföldön, ha nagyon muszáj.', 'Külföldön nem telefonálok, inkább SMS-ezek.', 'Külföldön kicsit visszafogom magam a magas roaming díjak miatt.', 'Külföldön ugyanúgy telefonálok és SMS-ezek, mint otthon.'
   = submit

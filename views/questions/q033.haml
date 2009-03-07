@@ -2,6 +2,6 @@
   = ask 'Használta már az alábbi mobil-szolgáltatásokat?'
   - if flash[:error]
     %p.error= flash[:error]
-  = table [ 'Autópálya matrica vásárlás', 'Parkolójegy vásárlás', 'Mobilkód nyereményjáték', 'Mozijegy vásárlás', 'Apróhirdetés feladás', 'Lottó vásárlás', 'Csengőhang letöltés', 'Játék letöltés', 'Mobil TV', 'Film letöltés', 'Zene letöltés' ], [ 'Szolgáltatás' ] + [nil]*2, lambda { |item| Answer.all(:questionnaire_id => @q.id, :number => 32).last.answer[item] == 'Nem' rescue false } do |item,disabled|
+  = table [ 'Autópálya matrica vásárlás', 'Parkolójegy vásárlás', 'Mobilkód', 'Mozijegy vásárlás', 'Apróhirdetés feladás', 'Lottó vásárlás', 'Csengőhang letöltés', 'Játék letöltés', 'Mobil TV', 'Film letöltés', 'Zene letöltés' ], [ 'Szolgáltatás' ] + [nil]*2, lambda { |item| Answer.all(:questionnaire_id => @q.id, :number => 32).last.answer[item] == 'Nem' rescue false } do |item,disabled|
     = single_choice_for item, disabled, 'Igen', 'Nem'
   = submit

@@ -153,7 +153,7 @@ single_choice 'Hány mobiltelefon számot használ?', [ '1', '2', '3', 'Több' ]
 
 single_choice 'Használta már külföldön mobiltelefonját?', [ 'Igen', 'Nem' ]
 multiple_choice 'Külföldön milyen mobiltelefon szolgáltatásokat vett igénybe?', [ 'Telefonálás', 'SMS', 'MMS', 'Hangposta', 'Internetezés / WAP' ]
-multiple_choice 'Az alábbi állítások közül melyik igaz Önre?', [ 'Csak akkor használom a telefonomat külföldön, ha nagyon muszáj.', 'Nem telefonálok, inkább SMS-ezek.', 'Kicsit visszafogom magam a magas roaming díjak miatt.', 'Ugyanúgy telefonálok és SMS-ezek, mint otthon.' ]
+multiple_choice 'Az alábbi állítások közül melyik igaz Önre?', [ 'Csak akkor használom a telefonomat külföldön, ha nagyon muszáj.', 'Külföldön nem telefonálok, inkább SMS-ezek.', 'Külföldön kicsit visszafogom magam a magas roaming díjak miatt.', 'Külföldön ugyanúgy telefonálok és SMS-ezek, mint otthon.' ]
 
 single_choice 'Rendelkezik mobilinternet előfizetéssel?', [ 'Igen', 'Nem' ]
 multiple_choice 'Melyik szolgáltatónál van mobilinternet előfizetése?', [ 'Pannon', 'T-Mobile', 'Vodafone' ]
@@ -169,7 +169,6 @@ PHONE = [ 'Internet/WAP',
           'Bluetooth',
           'Játékok',
           'GPS',
-          'Szundi',
           'Fényképezés',
           'Videó rögzítés',
           'SMS',
@@ -211,7 +210,7 @@ single_choice 'Milyen gyakran van bekapcsolva az aktívan használt készüléke
 
 SERVICES = [ 'Autópálya matrica vásárlás',
              'Parkolójegy vásárlás',
-             'Mobilkód nyereményjáték',
+             'Mobilkód',
              'Mozijegy vásárlás',
              'Apróhirdetés feladás',
              'Lottó vásárlás',

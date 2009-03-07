@@ -2,6 +2,6 @@
   = ask 'Rendelkezik az Ön készüléke a következő funkciókkal?'
   - if flash[:error]
     %p.error= flash[:error]
-  = table [ 'Internet/WAP', 'Számológép', 'Ébresztőóra', 'MMS', 'Kihangosítás', 'Bluetooth', 'Játékok', 'GPS', 'Szundi', 'Fényképezés', 'Videó rögzítés', 'SMS', 'MP3 lejátszás', 'Határidőnapló', 'Bejövő hívás elnémítása', 'Csengőhang rendelése névhez', 'Diktafon', 'Rádió', 'Mobilkód' ], [ 'Funkció' ] + [nil]*3, nil do |item,disabled|
+  = table [ 'Internet/WAP', 'Számológép', 'Ébresztőóra', 'MMS', 'Kihangosítás', 'Bluetooth', 'Játékok', 'GPS', 'Fényképezés', 'Videó rögzítés', 'SMS', 'MP3 lejátszás', 'Határidőnapló', 'Bejövő hívás elnémítása', 'Csengőhang rendelése névhez', 'Diktafon', 'Rádió', 'Mobilkód' ], [ 'Funkció' ] + [nil]*3, nil do |item,disabled|
     = single_choice_for item, disabled, 'Igen', 'Nem', 'Nem tudom'
   = submit

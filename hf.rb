@@ -520,7 +520,7 @@ post '/:questionnaire/q034' do
     # mobilkódra ugorjunk-e?
     a1 = ( Answer.all(:questionnaire_id => @q.id, :number => 21).last.answer rescue {} )
     a2 = ( Answer.all(:questionnaire_id => @q.id, :number => 32).last.answer rescue {} )
-    if a1['Mobilkód'] == 'Igen' or a2['Mobilkód nyereményjáték'] == 'Igen'
+    if a1['Mobilkód'] == 'Igen' or a2['Mobilkód'] == 'Igen'
       redirect_to_q 35
     else
       redirect_to_q 42
