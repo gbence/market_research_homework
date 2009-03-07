@@ -201,9 +201,9 @@ table_single_choice 'Rendelkezik az Ön készüléke a következő funkciókkal?
 table_single_choice 'Milyen gyakran használja az alábbi funkciókat?', [ 'Mindig', 'Gyakran', 'Általában', 'Ritkán', 'Soha' ], 'Funkció', PHONE
 table_check_box 'A felsorolt funkciók közül melyiket használná szívesen?', 'Funkció', PHONE
 
-single_choice 'Milyen gyakran cseréli mobiltelefon készülékét?', [ '1 - 2 havonta', '3 - 6 havonta', '7 - 12 havonta', '13 - 24 havonta', '25 - 36 havonta', 'Ritkábban' ]
+single_choice 'Milyen gyakran cseréli mobiltelefon készülékét?', [ '1 - 2 havonta', '3 - 6 havonta', '7 - 12 havonta', '13 - 24 havonta', '25 - 36 havonta', 'Ritkábban' ]
 multiple_choice_with_free 'Általában miért vásárol új készüléket?', [ 'Design', 'Új technológiai újdonság (streaming, chat, mobil TV, stb.)', 'Lejárt hűségszerződés', 'Kedvezményes ajánlat, akció', 'Egyéb, kérjük részletezze:' ]
-single_choice 'Hány készüléke volt az elmúlt 5 évben?', [ '1 – 3', '4 – 6', '7 – 9', '10, vagy annál is több' ]
+single_choice 'Hány készüléke volt az elmúlt 5 évben?', [ '1 - 3', '4 - 6', '7 - 9', '10, vagy annál is több' ]
 multiple_choice_with_free 'Milyen készüléket használ?', [ 'Alcatel', 'BlackBerry', 'iPhone', 'LG', 'Motorola', 'Nokia', 'Panasonic', 'Sagem', 'Samsung', 'Siemens', 'Sony Ericsson', 'egyéb:' ]
 single_choice 'Milyen árkategóriájú a legdrágább mobiltelefon készüléke, amelyet használ?', [ '0 - 5.000 Ft', '5.001 - 20.000 Ft', '20.001 - 60.000 Ft', '60.001 - 120.000 Ft', '120.001 Ft, vagy annál is több', 'Nem tudom' ]
 single_choice 'Hány működőképes készüléke van, beleértve a nem használt készülékeket is?', [ '1', '2', '3', '4', '5', 'Több' ]

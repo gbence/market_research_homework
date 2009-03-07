@@ -2,7 +2,8 @@
 !!! Strict
 %html
   %head
-    %title Kérdőív
+    %title== Kérdőív - #{@n}. kérdés
+    %meta{ :content => "text/html;charset=UTF-8", :'http-equiv' => 'content-type' }
     %link{ :href => "/hf.css", :rel => "stylesheet", :type => "text/css" }
     -#%link{ :href => "/tablesorter/blue/style.css", :rel => "stylesheet", :media => "screen", :type => "text/css" }
     %script{ :src => "/jquery-1.2.6.min.js", :type => "text/javascript" }
@@ -11,10 +12,10 @@
     -#%script{ :src => "/jquery.tablesorter.pager.js", :type => "text/javascript" }
   %body
     #header
-      %h1 xx Kérdőív
+      %h1 Kérdőív
     #page
       %fieldset.element
         %h2== #{@n}. kérdés
         = yield
     #footer
-      %p készítette: Bajor Gyula, Bősze Szilvi, Golda Bence (KYU2GG), Obreczán Mátyás, Szabó László
+      %p készítette: Bajor Gyula, Bősze Szilvi, Golda Bence, Obreczán Mátyás, Szabó László

@@ -222,15 +222,19 @@ end
 
 # q002: 'Melyik szolgáltatónál van előfizetése?', ["Pannon", "T-Mobile", "Vodafone"]
 post '/:questionnaire/q002' do
-  Answer.create(:answer => params[:a], :number => @n, :questionnaire => @q)
-  if params[:a].include?('Pannon')
-    redirect_to_q 3
-  elsif params[:a].include?('T-Mobile')
-    redirect_to_q 4
-  elsif params[:a].include?('Vodafone')
-    redirect_to_q 5
-  else
-    redirect_to_q 6
+  begin
+    Answer.create(:answer => params[:a], :number => @n, :questionnaire => @q)
+    if params[:a].include?('Pannon')
+      redirect_to_q 3
+    elsif params[:a].include?('T-Mobile')
+      redirect_to_q 4
+    elsif params[:a].include?('Vodafone')
+      redirect_to_q 5
+    else
+      redirect_to_q 6
+    end
+  rescue
+    haml "%pre=html_escape '#{$!.inspect}'"
   end
 end
 
