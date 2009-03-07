@@ -234,7 +234,7 @@ post '/:questionnaire/q002' do
       redirect_to_q 6
     end
   rescue
-    haml "%pre=html_escape '#{$!.inspect}'"
+    redirect_to_q 6
   end
 end
 
@@ -358,14 +358,18 @@ end
 
 # q017: 'Melyik szolgáltatónál van mobilinternet előfizetése?', ["Pannon", "T-Mobile", "Vodafone"]
 post '/:questionnaire/q017' do
-  Answer.create(:answer => params[:a], :number => @n, :questionnaire => @q)
-  if params[:a].include?('Pannon')
-    redirect_to_q 18
-  elsif params[:a].include?('T-Mobile')
-    redirect_to_q 19
-  elsif params[:a].include?('Vodafone')
-    redirect_to_q 20
-  else
+  begin
+    Answer.create(:answer => params[:a], :number => @n, :questionnaire => @q)
+    if params[:a].include?('Pannon')
+      redirect_to_q 18
+    elsif params[:a].include?('T-Mobile')
+      redirect_to_q 19
+    elsif params[:a].include?('Vodafone')
+      redirect_to_q 20
+    else
+      redirect_to_q 21
+    end
+  rescue
     redirect_to_q 21
   end
 end
@@ -478,13 +482,17 @@ end
 
 # q034: 'A szolgáltatások közül melyiket használná szívesen?', ["Aut\303\263p\303\241lya matrica v\303\241s\303\241rl\303\241s", "Parkol\303\263jegy v\303\241s\303\241rl\303\241s", "Mobilk\303\263d nyerem\303\251nyj\303\241t\303\251k", "Mozijegy v\303\241s\303\241rl\303\241s", "Apr\303\263hirdet\303\251s felad\303\241s", "Lott\303\263 v\303\241s\303\241rl\303\241s", "Cseng\305\221hang let\303\266lt\303\251s", "J\303\241t\303\251k let\303\266lt\303\251s", "Mobil TV", "Film let\303\266lt\303\251s", "Zene let\303\266lt\303\251s", "BKV-jegy v\303\241s\303\241rl\303\241s", "Koncert-jegy v\303\241s\303\241rl\303\241s", "M\303\272zeum-jegy v\303\241s\303\241rl\303\241s"]
 post '/:questionnaire/q034' do
-  Answer.create(:answer => params[:a], :number => @n, :questionnaire => @q)
-  # mobilkódra ugorjunk-e?
-  a1=@q.answers.first(:number => 21).answer rescue {}
-  a2=@q.answers.first(:number => 32).answer rescue {}
-  if a1['Mobilkód'] == 'Igen' and a2['Mobilkód nyereményjáték'] == 'Igen'
-    redirect_to_q 35
-  else
+  begin
+    Answer.create(:answer => params[:a], :number => @n, :questionnaire => @q)
+    # mobilkódra ugorjunk-e?
+    a1=@q.answers.first(:number => 21).answer rescue {}
+    a2=@q.answers.first(:number => 32).answer rescue {}
+    if a1['Mobilkód'] == 'Igen' and a2['Mobilkód nyereményjáték'] == 'Igen'
+      redirect_to_q 35
+    else
+      redirect_to_q 42
+    end
+  rescue
     redirect_to_q 42
   end
 end
