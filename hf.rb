@@ -401,22 +401,30 @@ end
 
 # q018: 'Ön szerint mi jellemzi legjobban a Pannon mobilinternet szolgáltatás?', ["Megb\303\255zhat\303\263an m\305\261k\303\266dik.", "\303\201ltal\303\241ban megy, de vannak probl\303\251m\303\241k.", "Csak n\303\251h\303\241ny helyen megy, ott is lassan.", "Alig tudom haszn\303\241lni, mindig vannak vele probl\303\251m\303\241k."]
 post '/:questionnaire/q018' do
-  Answer.create(:answer => params[:a], :number => @n, :questionnaire => @q)
-  if @q.answers.all(:number => 17).last.answer.include?('T-Mobile')
-    redirect_to_q 19
-  elsif @q.answers.all(:number => 17).last.answer.include?('Vodafone')
-    redirect_to_q 20
-  else
+  begin
+    Answer.create(:answer => params[:a], :number => @n, :questionnaire => @q)
+    if @q.answers.all(:number => 17).last.answer.include?('T-Mobile')
+      redirect_to_q 19
+    elsif @q.answers.all(:number => 17).last.answer.include?('Vodafone')
+      redirect_to_q 20
+    else
+      redirect_to_q 21
+    end
+  rescue
     redirect_to_q 21
   end
 end
 
 # q019: 'Ön szerint mi jellemzi legjobban a T-Mobile mobilinternet szolgáltatás?', ["Megb\303\255zhat\303\263an m\305\261k\303\266dik.", "\303\201ltal\303\241ban megy, de vannak probl\303\251m\303\241k.", "Csak n\303\251h\303\241ny helyen megy, ott is lassan.", "Alig tudom haszn\303\241lni, mindig vannak vele probl\303\251m\303\241k."]
 post '/:questionnaire/q019' do
-  Answer.create(:answer => params[:a], :number => @n, :questionnaire => @q)
-  if @q.answers.all(:number => 17).last.answer.include?('Vodafone')
-    redirect_to_q 20
-  else
+  begin
+    Answer.create(:answer => params[:a], :number => @n, :questionnaire => @q)
+    if @q.answers.all(:number => 17).last.answer.include?('Vodafone')
+      redirect_to_q 20
+    else
+      redirect_to_q 21
+    end
+  rescue
     redirect_to_q 21
   end
 end
