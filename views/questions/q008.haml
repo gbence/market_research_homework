@@ -1,5 +1,7 @@
 = form_for_q 8 do
   = ask 'Egy alkalommal mekkora összeget tölt fel a kártyájára?'
   %p.suggestion A lehetőségek közül egyet válasszon!
+  - if flash[:error]
+    %p.error= flash[:error]
   = single_choice '1.000 - 2.000 Ft', '2.001 - 4.000 Ft', '4.001 - 8.000 Ft', '8.001 - 15.000 Ft', '15.000 Ft-nál is többet'
   = submit

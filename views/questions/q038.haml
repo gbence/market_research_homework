@@ -1,5 +1,7 @@
 = form_for_q 38 do
-  = ask 'Sikerült letöltenie kódolvasó alkalmazást?'
+  = ask 'Olvasott már le sikeresen mobilkódot mobiltelefon készülékével?'
   %p.suggestion A lehetőségek közül egyet válasszon!
+  - if flash[:error]
+    %p.error= flash[:error]
   = single_choice 'Igen', 'Nem'
   = submit

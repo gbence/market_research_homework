@@ -1,5 +1,7 @@
 = form_for_q 34 do
-  = ask 'Milyen gyakran van bekapcsolva az aktívan használt készüléke?'
-  %p.suggestion A lehetőségek közül egyet válasszon!
-  = single_choice 'Éjjel-nappal', 'Nappal', 'Csak munkaidőben', 'Alkalmanként'
+  = ask 'A szolgáltatások közül melyiket használná szívesen?'
+  - if flash[:error]
+    %p.error= flash[:error]
+  = table [ 'Autópálya matrica vásárlás', 'Parkolójegy vásárlás', 'Mobilkód nyereményjáték', 'Mozijegy vásárlás', 'Apróhirdetés feladás', 'Lottó vásárlás', 'Csengőhang letöltés', 'Játék letöltés', 'Mobil TV', 'Film letöltés', 'Zene letöltés', 'BKV-jegy vásárlás', 'Koncert-jegy vásárlás', 'Múzeum-jegy vásárlás' ], [ nil, 'Szolgáltatás' ] do |item|
+    = check_box_for item
   = submit

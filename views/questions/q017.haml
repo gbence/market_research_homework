@@ -1,5 +1,7 @@
 = form_for_q 17 do
-  = ask 'Külföldön milyen mobiltelefon szolgáltatásokat vett igénybe?'
+  = ask 'Melyik szolgáltatónál van mobilinternet előfizetése?'
   %p.suggestion A lehetőségek közül többet is választhat!
-  = multiple_choice 'Telefonálás', 'SMS', 'MMS', 'Hangposta', 'Internetezés / WAP'
+  - if flash[:error]
+    %p.error= flash[:error]
+  = multiple_choice 'Pannon', 'T-Mobile', 'Vodafone'
   = submit

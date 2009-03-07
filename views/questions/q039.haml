@@ -1,5 +1,7 @@
 = form_for_q 39 do
-  = ask 'Olvasott már le sikeresen mobilkódot mobiltelefon készülékével?'
-  %p.suggestion A lehetőségek közül egyet válasszon!
-  = single_choice 'Igen', 'Nem'
+  = ask 'Mire használta vagy használja a mobilkódot?'
+  %p.suggestion A lehetőségek közül többet is választhat, illetve az 'Egyéb:'-re kattintva beírhat tetszőleges választ is!
+  - if flash[:error]
+    %p.error= flash[:error]
+  = multiple_choice_with_free 'Nyereményjáték', 'Információszerzés', 'Névjegykártya bejegyzések gyors olvasása', 'Egyéb:'
   = submit

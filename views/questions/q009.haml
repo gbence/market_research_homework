@@ -1,5 +1,7 @@
 = form_for_q 9 do
   = ask 'Havonta átlagosan mennyibe kerül az Ön mobiltelefon használata?'
   %p.suggestion A lehetőségek közül egyet válasszon!
+  - if flash[:error]
+    %p.error= flash[:error]
   = single_choice '0 - 3.000 Ft', '3.001 - 6.000 Ft', '6.001 - 10.000 Ft', '10.001 - 20.000 Ft', 'Több, mint 20.000 Ft'
   = submit

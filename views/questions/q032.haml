@@ -1,5 +1,7 @@
 = form_for_q 32 do
-  = ask 'Hány működőképes készüléke van, beleértve a nem használt készülékeket is?'
-  %p.suggestion A lehetőségek közül egyet válasszon!
-  = single_choice '1', '2', '3', '4', '5', 'Több'
+  = ask 'Ismeri az alábbi mobil-szolgáltatásokat?'
+  - if flash[:error]
+    %p.error= flash[:error]
+  = table [ 'Autópálya matrica vásárlás', 'Parkolójegy vásárlás', 'Mobilkód nyereményjáték', 'Mozijegy vásárlás', 'Apróhirdetés feladás', 'Lottó vásárlás', 'Csengőhang letöltés', 'Játék letöltés', 'Mobil TV', 'Film letöltés', 'Zene letöltés', 'BKV-jegy vásárlás', 'Koncert-jegy vásárlás', 'Múzeum-jegy vásárlás' ], [ 'Szolgáltatás' ] + [nil]*2 do |item|
+    = single_choice_for item, 'Igen', 'Nem'
   = submit

@@ -1,5 +1,7 @@
 = form_for_q 46 do
-  = ask 'Hányan élnek egy háztartásban?'
-  %p.suggestion Kérjük egy pozitív egész számot írjon a mezőbe (arab számokkal :) )!
-  = free_text
+  = ask 'Mi a munkaviszonya?'
+  %p.suggestion A lehetőségek közül egyet válasszon, illetve az 'Egyéb:'-re kattintva beírhat tetszőleges választ is!
+  - if flash[:error]
+    %p.error= flash[:error]
+  = single_choice_with_free 'Tanuló', 'Alkalmazott', 'Vezető beosztású', 'Vállalkozó', 'Nyugdíjas', 'Munkanélküli', 'Egyéb:'
   = submit

@@ -1,5 +1,7 @@
 = form_for_q 40 do
-  = ask 'Mire használta vagy használja a mobilkódot?'
-  %p.suggestion A lehetőségek közül többet is választhat!
-  = multiple_choice_with_free 'Nyereményjáték', 'Információszerzés', 'Névjegykártya bejegyzések gyors olvasása', 'Egyéb:'
+  = ask 'Milyen kódolvasót használ?'
+  %p.suggestion A lehetőségek közül többet is választhat, illetve az 'Egyéb:'-re kattintva beírhat tetszőleges választ is!
+  - if flash[:error]
+    %p.error= flash[:error]
+  = multiple_choice_with_free 'I-nigma', 'QuickMark', 'Telefonba beépített kliens', 'Egyéb:'
   = submit

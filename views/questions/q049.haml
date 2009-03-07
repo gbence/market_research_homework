@@ -1,0 +1,7 @@
+= form_for_q 49 do
+  = ask 'Szeretne kapni egy elektronikus példányt a kutatás eredményéből?'
+  %p.suggestion A lehetőségek közül egyet válasszon, illetve az 'Igen, erre az email-címre:'-re kattintva beírhat tetszőleges választ is!
+  - if flash[:error]
+    %p.error= flash[:error]
+  = single_choice_with_free 'Nem', 'Igen, erre az email-címre:'
+  = submit

@@ -1,5 +1,7 @@
 = form_for_q 45 do
-  = ask 'Mennyi a háztartásában az egy főre jutó nettó jövedelem?'
-  %p.suggestion Kérjük egy pozitív egész számot írjon a mezőbe (arab számokkal :) )!
-  = free_text
+  = ask 'Mennyi a havi nettó jövedelme?'
+  %p.suggestion A lehetőségek közül egyet válasszon!
+  - if flash[:error]
+    %p.error= flash[:error]
+  = single_choice 'Nincs saját keresetem', '100e Ft alatt', '100e - 200e Ft', '200e - 300e Ft', '300e - 500e Ft', '500e Ft felett', 'Nem kívánom megadni'
   = submit

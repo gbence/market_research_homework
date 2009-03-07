@@ -1,5 +1,7 @@
 = form_for_q 30 do
-  = ask 'Milyen készüléket használ?'
-  %p.suggestion A lehetőségek közül többet is választhat!
-  = multiple_choice_with_free 'Alcatel', 'BlackBerry', 'iPhone', 'LG', 'Motorola', 'Nokia', 'Panasonic', 'Sagem', 'Samsung', 'Siemens', 'Sony Ericsson', 'egyéb:'
+  = ask 'Hány készüléket tart éjjel-nappal bekapcsolva?'
+  %p.suggestion A lehetőségek közül egyet válasszon!
+  - if flash[:error]
+    %p.error= flash[:error]
+  = single_choice 'Egyet sem', '1', '2', '3', '4', '5', 'Több'
   = submit

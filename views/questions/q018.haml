@@ -1,5 +1,7 @@
 = form_for_q 18 do
-  = ask 'Az alábbi állítások közül melyik igaz Önre?'
-  %p.suggestion A lehetőségek közül többet is választhat!
-  = multiple_choice 'Csak akkor használom a telefonomat külföldön, ha nagyon muszáj.', 'Nem telefonálok, inkább SMS-ezek.', 'Kicsit visszafogom magam a magas roaming díjak miatt.', 'Ugyanúgy telefonálok és SMS-ezek, mint otthon.'
+  = ask 'Ön szerint mi jellemzi legjobban a Pannon mobilinternet szolgáltatás?'
+  %p.suggestion A lehetőségek közül egyet válasszon!
+  - if flash[:error]
+    %p.error= flash[:error]
+  = single_choice 'Megbízhatóan működik.', 'Általában megy, de vannak problémák.', 'Csak néhány helyen megy, ott is lassan.', 'Alig tudom használni, mindig vannak vele problémák.'
   = submit

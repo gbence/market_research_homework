@@ -1,5 +1,7 @@
 = form_for_q 7 do
   = ask 'Milyen gyakran tölti fel egyenlegét?'
   %p.suggestion A lehetőségek közül egyet válasszon!
+  - if flash[:error]
+    %p.error= flash[:error]
   = single_choice 'Hetente', 'Két hetente', 'Havonta', 'Két havonta', 'Félévente', 'Ritkábban'
   = submit

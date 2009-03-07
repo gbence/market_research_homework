@@ -1,5 +1,7 @@
 = form_for_q 41 do
-  = ask 'Milyen kódolvasót használ?'
-  %p.suggestion A lehetőségek közül többet is választhat!
-  = multiple_choice_with_free 'I-nigma', 'QuickMark', 'Telefonba beépített kliens', 'Egyéb:'
+  = ask 'Értékelje a mobilkódot! Van értelme? Ön szerint miért jó, miért rossz?'
+  %p.suggestion Írja meg véleményét, szabadon!
+  - if flash[:error]
+    %p.error= flash[:error]
+  = free_text
   = submit

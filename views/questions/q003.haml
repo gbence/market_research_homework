@@ -1,5 +1,7 @@
 = form_for_q 3 do
   = ask 'Meg van elégedve a Pannon szolgáltatásával?'
   %p.suggestion A lehetőségek közül egyet válasszon!
+  - if flash[:error]
+    %p.error= flash[:error]
   = single_choice 'Igen', 'Nem'
   = submit

@@ -1,5 +1,7 @@
 = form_for_q 20 do
-  = ask 'Melyik szolgáltatónál van mobilinternet előfizetése?'
-  %p.suggestion A lehetőségek közül többet is választhat!
-  = multiple_choice 'Pannon', 'T-Mobile', 'Vodafone'
+  = ask 'Ön szerint mi jellemzi legjobban a Vodafone mobilinternet szolgáltatás?'
+  %p.suggestion A lehetőségek közül egyet válasszon!
+  - if flash[:error]
+    %p.error= flash[:error]
+  = single_choice 'Megbízhatóan működik.', 'Általában megy, de vannak problémák.', 'Csak néhány helyen megy, ott is lassan.', 'Alig tudom használni, mindig vannak vele problémák.'
   = submit

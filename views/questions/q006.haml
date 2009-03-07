@@ -1,5 +1,7 @@
 = form_for_q 6 do
   = ask 'Milyen típusú mobiltelefon szolgáltatást vesz igénybe?'
   %p.suggestion A lehetőségek közül egyet válasszon!
+  - if flash[:error]
+    %p.error= flash[:error]
   = single_choice 'Előfizetéses', 'Kártyás'
   = submit

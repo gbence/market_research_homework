@@ -1,5 +1,7 @@
 = form_for_q 44 do
-  = ask 'Kora?'
-  %p.suggestion Kérjük egy pozitív egész számot írjon a mezőbe (arab számokkal :) )!
-  = free_text
+  = ask 'Mi a legmagasabb iskolai végzettsége?'
+  %p.suggestion A lehetőségek közül egyet válasszon!
+  - if flash[:error]
+    %p.error= flash[:error]
+  = single_choice 'Nincs', '8 általános', 'Szakmunkás', 'Érettségi', 'Felsőfokú'
   = submit

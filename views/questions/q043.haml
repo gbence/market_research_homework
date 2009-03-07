@@ -1,5 +1,7 @@
 = form_for_q 43 do
-  = ask 'Neme?'
-  %p.suggestion A lehetőségek közül egyet válasszon!
-  = single_choice 'Férfi', 'Nő'
+  = ask 'Kora?'
+  %p.suggestion Számjegyekkel írjon be egy pozitív egész számot!
+  - if flash[:error]
+    %p.error= flash[:error]
+  = free_text_field
   = submit

@@ -1,5 +1,7 @@
 = form_for_q 28 do
-  = ask 'Általában miért vásárol új készüléket?'
-  %p.suggestion A lehetőségek közül többet is választhat!
-  = multiple_choice_with_free 'Design', 'Új technológiai újdonság (streaming, chat, mobil TV, stb.)', 'Lejárt hűségszerződés', 'Kedvezményes ajánlat, akció', 'Egyéb, kérjük részletezze:'
+  = ask 'Milyen árkategóriájú a legdrágább mobiltelefon készüléke, amelyet használ?'
+  %p.suggestion A lehetőségek közül egyet válasszon!
+  - if flash[:error]
+    %p.error= flash[:error]
+  = single_choice '0 - 5.000 Ft', '5.001 - 20.000 Ft', '20.001 - 60.000 Ft', '60.001 - 120.000 Ft', '120.001 Ft, vagy annál is több', 'Nem tudom'
   = submit

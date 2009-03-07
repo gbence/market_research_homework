@@ -1,5 +1,7 @@
 = form_for_q 23 do
-  = ask 'Ön szerint mi jellemzi legjobban a Vodafone mobilinternet szolgáltatás?'
-  %p.suggestion A lehetőségek közül egyet válasszon!
-  = single_choice 'Megbízhatóan működik.', 'Általában megy, de vannak problémák.', 'Csak néhány helyen megy, ott is lassan.', 'Alig tudom használni, mindig vannak vele problémák.'
+  = ask 'A felsorolt funkciók közül melyiket használná szívesen?'
+  - if flash[:error]
+    %p.error= flash[:error]
+  = table [ 'Internet/WAP', 'Mobilkód', 'Számológép', 'Konferenciahívás', 'Hangposta', 'Ébresztőóra', 'MMS', 'EMS (képüzenet)', 'Kihangosítás', 'Bluetooth', 'Játékok', 'Chat', 'GPS', 'Szundi', 'Fényképezés', 'Videó rögzítés', 'SMS', 'MP3 lejátszás', 'Jegyzet', 'Határidőnapló', 'Bejövő hívás elnémítása', 'Több telefonszám mentése egy névhez', 'Csengőhang rendelése névhez', 'Gyorshívás', 'SMS sablon', 'Híváskorlátozás', 'Java támogatás', 'Hívásszűrés', 'Valutaárfolyam', 'Diktafon', 'Hívásvárakoztatás', 'Ütésállóság', 'Vízállóság', 'Rádió', 'Nagyméretű memóriakártya' ], [ nil, 'Funkció' ] do |item|
+    = check_box_for item
   = submit

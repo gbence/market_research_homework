@@ -1,5 +1,7 @@
 = form_for_q 16 do
-  = ask 'Használta már külföldön mobiltelefonját?'
+  = ask 'Rendelkezik mobilinternet előfizetéssel?'
   %p.suggestion A lehetőségek közül egyet válasszon!
+  - if flash[:error]
+    %p.error= flash[:error]
   = single_choice 'Igen', 'Nem'
   = submit

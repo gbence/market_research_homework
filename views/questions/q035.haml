@@ -1,5 +1,7 @@
 = form_for_q 35 do
   = ask 'Hol hallott a mobilkód szolgáltatásról?'
-  %p.suggestion A lehetőségek közül többet is választhat!
+  %p.suggestion A lehetőségek közül többet is választhat, illetve az 'Egyéb:'-re kattintva beírhat tetszőleges választ is!
+  - if flash[:error]
+    %p.error= flash[:error]
   = multiple_choice_with_free 'Internet', 'Magazinok', 'Szórólapok', 'Ismerőstől', 'Egyéb:'
   = submit

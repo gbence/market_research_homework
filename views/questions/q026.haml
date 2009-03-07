@@ -1,5 +1,7 @@
 = form_for_q 26 do
-  = ask 'A felsorolt funkciók közül melyiket használná szivesen?'
-  = table [ 'Internet/WAP', 'Mobilkód', 'Számológép', 'Konferenciahívás', 'Hangposta', 'Ébresztőóra', 'MMS', 'Kihangosítás', 'Bluetooth', 'Játékok', 'Chat', 'GPS', 'Szundi', 'Fényképezés', 'Videó rögzítés', 'SMS', 'MP3 lejátszás', 'Jegyzet', 'Határidőnapló', 'Bejövő hívás elnémítása', 'Több telefonszám mentése egy névhez', 'Csengőhang rendelése névhez', 'Gyorshívás', 'SMS sablon', 'Híváskorlátozás', 'EMS (képüzenet)', 'Java támogatás', 'Hívásszűrés', 'Valutaárfolyam', 'Diktafon', 'Emailezés', 'Hívásvárakoztatás', 'Ütésállóság', 'Vízállóság', 'Rádió', 'Nagyméretű memóriakártya' ], [ nil, 'Funkció' ] do |item|
-    = check_box_for item
+  = ask 'Hány készüléke volt az elmúlt 5 évben?'
+  %p.suggestion A lehetőségek közül egyet válasszon!
+  - if flash[:error]
+    %p.error= flash[:error]
+  = single_choice '1 – 3', '4 – 6', '7 – 9', '10, vagy annál is több'
   = submit

@@ -1,5 +1,7 @@
 = form_for_q 27 do
-  = ask 'Milyen gyakran cseréli mobiltelefon készülékét?'
-  %p.suggestion A lehetőségek közül egyet válasszon!
-  = single_choice '1 - 2 havonta', '3 - 6 havonta', '7 - 12 havonta', '13 - 24 havonta', '25 - 36 havonta', 'Ritkábban'
+  = ask 'Milyen készüléket használ?'
+  %p.suggestion A lehetőségek közül többet is választhat, illetve az 'egyéb:'-re kattintva beírhat tetszőleges választ is!
+  - if flash[:error]
+    %p.error= flash[:error]
+  = multiple_choice_with_free 'Alcatel', 'BlackBerry', 'iPhone', 'LG', 'Motorola', 'Nokia', 'Panasonic', 'Sagem', 'Samsung', 'Siemens', 'Sony Ericsson', 'egyéb:'
   = submit

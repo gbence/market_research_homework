@@ -1,5 +1,7 @@
 = form_for_q 2 do
   = ask 'Melyik szolgáltatónál van előfizetése?'
   %p.suggestion A lehetőségek közül többet is választhat!
+  - if flash[:error]
+    %p.error= flash[:error]
   = multiple_choice 'Pannon', 'T-Mobile', 'Vodafone'
   = submit
